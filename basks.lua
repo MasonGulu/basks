@@ -304,7 +304,8 @@ local function setupInfo()
 
   local footerStart = itemInfoStart+6+5
 
-  local creditLabel = frames.info:addLabel():setPosition(2,footerStart):setSize("parent.w-2",1):setText("WIP Shop Program by ShreksHellraiser"):show()
+  local creditLabel = frames.info:addLabel():setPosition(2,footerStart):setSize("parent.w-2",1):setText("BASKS by ShreksHellraiser"):show()
+  -- BASalt Krist Shop
   local backButton = frames.info:addButton():setPosition(2, footerStart+1):setSize("parent.w-2",3):setText("Back"):onClick(function ()
     openFrame("main", "bottom")
   end)
