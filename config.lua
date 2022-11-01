@@ -384,6 +384,9 @@ local function setupListingEditMenu()
     end
   end)
   return function(l, i)
+    if not l then
+      return
+    end
     listing, index = l, i
     name:setValue(l.name)
     id:setValue(l.id)

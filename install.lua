@@ -17,8 +17,8 @@ shell.run("wget https://gist.githubusercontent.com/MCJack123/473475f07b980d57dd2
 print("Downloading abstractInvLib..")
 shell.run("wget https://raw.githubusercontent.com/MasonGulu/msks/main/abstractInvLib.lua abstractInvLib.lua")
 
-print("Downloading basks")
-shell.run("wget https://raw.githubusercontent.com/MasonGulu/basks/master/basks.lua basks.lua")
+print("Downloading msgks")
+shell.run("wget https://raw.githubusercontent.com/MasonGulu/basks/master/msgks.lua msgks.lua")
 
 print("Downloading config")
-shell.run("wget https://raw.githubusercontent.com/MasonGulu/basks/master/basksconfig.lua config.lua")
+shell.run("wget https://raw.githubusercontent.com/MasonGulu/basks/master/config.lua config.lua")

@@ -98,7 +98,7 @@ local function initialize()
   config = loadTFile("conf")
   inv = require("abstractInvLib")(config.input)
   inv.refreshStorage()
-  listings = loadTFile("listing")
+  listings = loadTFile("listings")
   cart = {}
 
   kst = require("ktwsl")(config.url, config.privateKey)
@@ -304,7 +304,7 @@ local function setupInfo()
 
   local footerStart = itemInfoStart+6+5
 
-  local creditLabel = frames.info:addLabel():setPosition(2,footerStart):setSize("parent.w-2",1):setText("BASKS by ShreksHellraiser"):show()
+  local creditLabel = frames.info:addLabel():setPosition(2,footerStart):setSize("parent.w-2",1):setText("MSGKS by ShreksHellraiser"):show()
   -- BASalt Krist Shop
   local backButton = frames.info:addButton():setPosition(2, footerStart+1):setSize("parent.w-2",3):setText("Back"):onClick(function ()
     openFrame("main", "bottom")
@@ -318,10 +318,9 @@ local function setupInfo()
       priceLabel:setText(selectedListing.price)
       -- reset the textbox since you can't clear it
       selectedListing.description = selectedListing.description or {}
-      itemDescription:hide()
       local descriptionHeight = #selectedListing.description
-      itemDescription = frames.info:addTextfield():setPosition(4,itemInfoStart+5):setSize("parent.w-5",descriptionHeight):disable()
-      itemDescription:addKeywords(colors.purple, {"trans rights"})
+      itemDescription:clear()
+      itemDescription:setSize("parent.w-5",descriptionHeight)
       for k,v in pairs(selectedListing.description) do
         itemDescription:addLine(v, k)
       end
@@ -538,6 +537,8 @@ local function setupPurchase()
   end)
 end
 
+
+local successfulTerminate = false
 --[[
 .########.########.########..##.....##.####.##....##....###....########.########
 ....##....##.......##.....##.###...###..##..###...##...##.##......##....##......
@@ -558,7 +559,7 @@ local function setupTerminate()
   local passwordInput = frames.terminate:addInput():setInputType("password"):setPosition(2,7):setSize("parent.w-2",1):onChange(function (self)
     if self:getValue() == config.pass then
       os.queueEvent("terminateApproved")
-      basalt.debug("Onchange")
+      successfulTerminate = true
     end
   end)
 
@@ -581,6 +582,7 @@ local function setupTerminate()
       return false
     elseif (event=="disk") and menuOpen and config.diskID then
       if peripheral.call(disk, "getDiskID") == config.diskID then
+        successfulTerminate = true
         os.queueEvent("terminateApproved")
       end
     end
@@ -590,7 +592,7 @@ end
 
 
 local stat, v = pcall(initialize)
-if not stat or (not (config and config.pass)) then
+if not stat or (not (config and config.pass and config.pass ~= "")) then
   term.setTextColor(colors.red)
   print("Failed to initialize shop...")
   print(v)
@@ -598,7 +600,7 @@ if not stat or (not (config and config.pass)) then
   if kst then
     kst.stop()
   end
-  if not (config and config.pass) then
+  if not (config and config.pass and config.pass ~= "") then
     print("WARNING! You do not have a termination password set.")
     print("The program has been stopped for your protection.")
     return
@@ -618,3 +620,13 @@ setupPurchase()
 openFrame(currentFrame,"bottom")
 os.queueEvent("syncListings")
 basalt.autoUpdate()
+if not successfulTerminate then
+  term.setCursorPos(1,term.getSize()[2])
+  term.setTextColor(colors.red)
+  term.setBackgroundColor(colors.gray)
+  term.clearLine()
+  term.write("Please restart the computer")
+  while true do
+    os.pullEventRaw()
+  end
+end
