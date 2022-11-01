@@ -1,5 +1,7 @@
 # MSGKS
 ## Modern Simple Graphical Krist Shop
+THIS IS IN DEVELOPMENT USE AT OWN RISK
+
 This is a graphical [Krist](https://www.krist.dev) shop for ComputerCraft:Tweaked. This uses [Basalt](https://basalt.madefor.cc/#/) for the GUI.
 ## Features
 * Graphical interface
