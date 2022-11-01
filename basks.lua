@@ -98,7 +98,7 @@ local function initialize()
   config = loadTFile("conf")
   inv = require("abstractInvLib")(config.input)
   inv.refreshStorage()
-  listings = loadTFile("list")
+  listings = loadTFile("listing")
   cart = {}
 
   kst = require("ktwsl")(config.url, config.privateKey)
