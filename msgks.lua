@@ -473,9 +473,13 @@ local function setupPurchase()
   end
 
   local function finishTransaction()
+    local invQ = {}
     for k,v in pairs(cart) do
-      inv.pushItems(config.output, v.id, v.cart)
+      invQ[#invQ+1] = function ()
+        inv.pushItems(config.output, v.id, v.cart, nil, v.nbt)
+      end
     end
+    parallel.waitForAll(table.unpack(invQ))
     clearCart()
     openFrame("main","top")
     if timer then
