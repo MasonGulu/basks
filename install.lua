@@ -6,7 +6,7 @@
 -- abstractInvLib https://gist.githubusercontent.com/MasonGulu/57ef0f52a93304a17a9eaea21f431de6/raw/0e4bba991532b019873f659f09f09f23a0493b4d/abstractInvLib.lua
 
 print("Installing basalt..")
-shell.run("wget run https://basalt.madefor.cc/install.lua packed basalt.lua dev")
+shell.run("wget run https://basalt.madefor.cc/install.lua release basalt-1.6.4.lua")
 
 print("Downloading KTWSL..")
 shell.run("wget https://raw.githubusercontent.com/MasonGulu/msks/main/ktwsl.lua ktwsl.lua")
